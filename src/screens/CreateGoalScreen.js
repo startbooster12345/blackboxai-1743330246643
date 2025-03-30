@@ -5,30 +5,31 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CreateGoalScreen = () => {
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('personal');
-  const [deadline, setDeadline] = useState('');
-  const [specific, setSpecific] = useState('');
   const [actions, setActions] = useState([{ id: Date.now(), text: '' }]);
   const navigation = useNavigation();
 
   const handleAddAction = () => {
+    console.log('Adding new action step');
     setActions([...actions, { id: Date.now(), text: '' }]);
   };
 
   const handleActionChange = (text, id) => {
+    console.log('Updating action step:', id, text);
     setActions(actions.map(action => 
       action.id === id ? { ...action, text } : action
     ));
   };
 
   const handleRemoveAction = (id) => {
+    console.log('Removing action step:', id);
     if (actions.length > 1) {
       setActions(actions.filter(action => action.id !== id));
     }
   };
 
   const handleSubmit = () => {
-    // Validate inputs
+    console.log('Submitting goal with actions:', actions);
+    
     if (!title.trim()) {
       Alert.alert('Error', 'Please enter a goal title');
       return;
@@ -42,21 +43,13 @@ const CreateGoalScreen = () => {
     const newGoal = {
       id: Date.now().toString(),
       title: title.trim(),
-      category,
-      deadline,
-      specific: specific.trim(),
       actions: actions.map(action => action.text.trim()),
-      createdAt: new Date().toISOString(),
-      completed: false
+      createdAt: new Date().toISOString()
     };
 
-    // TODO: Implement saveGoal function
-    // saveGoal(newGoal);
-    
-    navigation.navigate('Dashboard', { 
-      success: true,
-      message: 'Goal created successfully!' 
-    });
+    console.log('Goal created:', newGoal);
+    // TODO: Implement save functionality
+    navigation.goBack();
   };
 
   return (
@@ -70,43 +63,12 @@ const CreateGoalScreen = () => {
         onChangeText={setTitle}
       />
 
-      <Text style={styles.label}>Category:</Text>
-      <View style={styles.categoryContainer}>
-        {['personal', 'work', 'health', 'education'].map((cat) => (
-          <TouchableOpacity
-            key={cat}
-            style={[
-              styles.categoryButton,
-              category === cat && styles.selectedCategory
-            ]}
-            onPress={() => setCategory(cat)}
-          >
-            <Text style={styles.categoryText}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Deadline (YYYY-MM-DD)"
-        value={deadline}
-        onChangeText={setDeadline}
-      />
-
-      <TextInput
-        style={[styles.input, styles.textArea]}
-        placeholder="Specific details"
-        multiline
-        value={specific}
-        onChangeText={setSpecific}
-      />
-
       <Text style={styles.label}>Action Steps *</Text>
       {actions.map((action) => (
         <View key={action.id} style={styles.actionContainer}>
           <TextInput
             style={[styles.input, styles.actionInput]}
-            placeholder={`Action step`}
+            placeholder={`Action step ${actions.indexOf(action) + 1}`}
             value={action.text}
             onChangeText={(text) => handleActionChange(text, action.id)}
           />
@@ -159,10 +121,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
   },
-  textArea: {
-    height: 100,
-    textAlignVertical: 'top',
-  },
   label: {
     fontWeight: 'bold',
     marginBottom: 10,
@@ -205,24 +163,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  categoryContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 15,
-  },
-  categoryButton: {
-    padding: 10,
-    marginRight: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  selectedCategory: {
-    backgroundColor: '#3B82F6',
-  },
-  categoryText: {
-    color: '#333',
   },
 });
 
