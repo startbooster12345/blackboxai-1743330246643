@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Goal - Success Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <header class="flex items-center mb-8">
+      <a href="index.html" class="mr-4 text-gray-600 dark:text-gray-300">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Create SMART Goal</h1>
+    </header>
+
+    <form id="goalForm" class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Goal Title</label>
+          <input type="text" id="goalTitle" required
+                 class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                 placeholder="Example: Learn React Native">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+            <select id="goalCategory" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+              <option value="career">Career</option>
+              <option value="health">Health</option>
+              <option value="learning">Learning</option>
+              <option value="personal">Personal Growth</option>
+              <option value="finance">Finance</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deadline</label>
+            <input type="date" id="goalDeadline" required
+                   class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">SMART Criteria</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Specific</label>
+            <textarea id="specific" rows="2" required
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                      placeholder="What exactly do you want to accomplish?"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Measurable</label>
+            <textarea id="measurable" rows="2" required
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                      placeholder="How will you measure progress?"></textarea>
+          </div>
+
+          <!-- Similar blocks for Achievable, Relevant, Time-bound -->
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Action Steps</h2>
+        <div id="actionItems" class="space-y-3">
+          <!-- Action items will be added here -->
+        </div>
+        <button type="button" id="addAction" class="mt-4 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+          <i class="fas fa-plus mr-1"></i> Add Action Step
+        </button>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+          Save Goal
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
