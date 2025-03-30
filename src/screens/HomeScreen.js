@@ -7,11 +7,14 @@ const HomeScreen = ({ navigation }) => {
   const [dailyQuote, setDailyQuote] = useState(null);
 
   useEffect(() => {
+    console.log('Loading initial quote...');
     loadDailyQuote();
   }, []);
 
   const loadDailyQuote = () => {
+    console.log('Getting random quote...');
     const quote = getRandomQuote();
+    console.log('Quote loaded:', quote);
     setDailyQuote(quote);
   };
 
@@ -19,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Success Planner</Text>
       
-      {dailyQuote && (
+      {dailyQuote ? (
         <View style={styles.quoteContainer}>
           <Text style={styles.quoteText}>"{dailyQuote.text}"</Text>
           <Text style={styles.quoteAuthor}>— {dailyQuote.author}</Text>
@@ -30,6 +33,8 @@ const HomeScreen = ({ navigation }) => {
             <Ionicons name="refresh" size={24} color="#3B82F6" />
           </TouchableOpacity>
         </View>
+      ) : (
+        <Text>Loading quote...</Text>
       )}
 
       <TouchableOpacity
